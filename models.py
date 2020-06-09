@@ -4,8 +4,7 @@ import os
 import json
 from datetime import date
 
-database_name = "heroku"
-database_path = "postgres://{}/{}".format(os.environ['DATABASE_URL'], database_name)
+database_path = os.environ['DATABASE_URL']
 
 
 db = SQLAlchemy()

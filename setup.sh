@@ -1,5 +1,5 @@
-export DATABASE_URL='postgres://xblfaoxlanyxgd:945cc43c673c7a72afadfb9c5cb63460b1d2a4725dfddee87f062b23e7bbed74@ec2-54-86-170-8.compute-1.amazonaws.com:5432/d6o9iuo93hliqe'
-#export DATABASE_URL=postgres://'localhost:5432'/heroku
+#export DATABASE_URL='postgres://xblfaoxlanyxgd:945cc43c673c7a72afadfb9c5cb63460b1d2a4725dfddee87f062b23e7bbed74@ec2-54-86-170-8.compute-1.amazonaws.com:5432/d6o9iuo93hliqe'
+export DATABASE_URL=postgres://postgres@localhost:5432/heroku
 #export SQLALCHEMY_DATABASE_URI='postgres://mdnrwzggwuidhj:b0b5ffb6446b7c431a4beec6f801646a705e141fc97116e93f9d5a07ed7a40f9@ec2-50-17-178-87.compute-1.amazonaws.com:5432/d64el9hjsoh7t8'
 export AUTH0_DOMAIN='dev--3xgavp1.eu.auth0.com'
 export API_AUDIENCE='casting'

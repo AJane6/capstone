@@ -3,6 +3,7 @@ from flask import request, abort
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
+import os
 
 
 AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']

@@ -34,7 +34,7 @@ class CastingTestCase(unittest.TestCase):
     """This class represents the Casting test case"""
 
     def setUp(self):
-        """Executed before each test. Define test vars and initialize"""
+        """Executed before each test"""
         self.app = create_app()
         self.client = self.app.test_client
         self.database_name = "test_heroku"
@@ -108,32 +108,32 @@ class CastingTestCase(unittest.TestCase):
         self.assertFalse(data["success"])
         self.assertEqual(data["message"], "unprocessable entity")
 
-    def test_get_actors(self):  # assistant can get actors
+    def test_get_actors(self):
         """Test getting actors successfully """
         res = self.client().get('/actors', headers=casting_assistant)
         data = json.loads(res.data)
 
-        #self.assertEqual(res.status_code, 200)
-        #self.assertTrue(data["success"])
-        #self.assertTrue(data["actors"])
+        #  self.assertEqual(res.status_code, 200)
+        #  self.assertTrue(data["success"])
+        #  self.assertTrue(data["actors"])
 
-    def test_get_movies(self):  # assistant can get movies
+    def test_get_movies(self):
         """Test getting movies """
         res = self.client().get('/movies', headers=casting_assistant)
         data = json.loads(res.data)
 
-        #self.assertEqual(res.status_code, 200)
-        #self.assertTrue(data["success"])
-        #self.assertTrue(data["movies"])
+        #  self.assertEqual(res.status_code, 200)
+        #  self.assertTrue(data["success"])
+        #  self.assertTrue(data["movies"])
 
-    def test_patch_actor(self):  # executive can patch actors
+    def test_patch_actor(self):
         """Test updating an actor in database """
         res = self.client().patch('/actors/2', json=new_actor, headers=executive_producer)
         data = json.loads(res.data)
 
-        #self.assertEqual(res.status_code, 200)
-        #self.assertTrue(data["success"])
-        #self.assertTrue(data["updated actor"])
+        #  self.assertEqual(res.status_code, 200)
+        #  self.assertTrue(data["success"])
+        #  self.assertTrue(data["updated actor"])
 
     def test_patch_actor_400(self):
         """Test updating an actor with invalid actor_id """
@@ -144,14 +144,14 @@ class CastingTestCase(unittest.TestCase):
         self.assertFalse(data["success"])
         self.assertEqual(data["message"], "bad request")
 
-    def test_patch_movie(self):  # director can patch movies
+    def test_patch_movie(self):
         """Test updating a movie in database """
         res = self.client().patch('/movies/2', json=partial_movie, headers=casting_director)
         data = json.loads(res.data)
 
-        #self.assertEqual(res.status_code, 200)
-        #self.assertTrue(data["success"])
-        #self.assertTrue(data["updated movie"])
+        #  self.assertEqual(res.status_code, 200)
+        #  self.assertTrue(data["success"])
+        #  self.assertTrue(data["updated movie"])
 
     def test_patch_movie_400(self):
         """Test updating a movie with invalid movie_id """
@@ -162,42 +162,41 @@ class CastingTestCase(unittest.TestCase):
         self.assertFalse(data["success"])
         self.assertEqual(data["message"], "bad request")
 
-    def test_delete_actor(self):  # director can delete actors
+    def test_delete_actor(self):
         """Test deleting an actor from the database """
         res = self.client().delete('/actors/2/delete', headers=casting_director)
         data = json.loads(res.data)
 
-        #self.assertEqual(res.status_code, 200)
-        #self.assertTrue(data["success"])
-        #self.assertTrue(data["deleted"])
+        #  self.assertEqual(res.status_code, 200)
+        #  self.assertTrue(data["success"])
+        #  self.assertTrue(data["deleted"])
 
     def test_delete_actor_404(self):
         """Test deleting an actor with invalid actor_id """
         res = self.client().delete('/actors/2/delete', headers=executive_producer)
         data = json.loads(res.data)
 
-        #self.assertEqual(res.status_code, 404)
-        #self.assertFalse(data["success"])
-        #self.assertEqual(data["message"], "resource not found")
+        #  self.assertEqual(res.status_code, 404)
+        #  self.assertFalse(data["success"])
+        #  self.assertEqual(data["message"], "resource not found")
 
     def test_delete_movie(self):  # executive can delete movies
         """Test deleting a movie from the database """
         res = self.client().delete('/movies/3/delete', headers=executive_producer)
         data = json.loads(res.data)
 
-        #self.assertEqual(res.status_code, 200)
-        #self.assertTrue(data["success"])
-        #self.assertTrue(data["deleted"])
+        #  self.assertEqual(res.status_code, 200)
+        #  self.assertTrue(data["success"])
+        #  self.assertTrue(data["deleted"])
 
     def test_delete_movie_404(self):
         """Test deleting a movie with invalid movie_id """
         res = self.client().delete('/movies/1/delete', headers=executive_producer)
         data = json.loads(res.data)
 
-        #self.assertEqual(res.status_code, 404)
-        #self.assertFalse(data["success"])
-        #self.assertEqual(data["message"], "resource not found")
-
+        #  self.assertEqual(res.status_code, 404)
+        #  self.assertFalse(data["success"])
+        #  self.assertEqual(data["message"], "resource not found")
 
     """
     Secondly, a test to demonstrate role based access control
@@ -221,7 +220,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertFalse(data["success"])
         self.assertEqual(data["message"], "unauthorized")
 
-    def test_patch_actor_assistant_permissions_500(self):  # assistant cannot patch actors
+    def test_patch_actor_assistant_permissions_500(self):
         """Test that assistants cannot patch actors """
         res = self.client().patch('/actors/1', json=partial_actor, headers=casting_assistant)
         data = json.loads(res.data)
@@ -230,7 +229,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertFalse(data["success"])
         self.assertEqual(data["message"], "internal server error")
 
-    def test_post_movie_director_permissions_500(self):  # director cannot post movies
+    def test_post_movie_director_permissions_500(self):
         """Test that directors cannot delete actors """
         res = self.client().post('/actors/create', headers=casting_director)
         data = json.loads(res.data)
@@ -239,7 +238,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertFalse(data["success"])
         self.assertEqual(data["message"], "internal server error")
 
-    def test_patch_movie_assistant_permissions_500(self):  # assistant cannot patch movies
+    def test_patch_movie_assistant_permissions_500(self):
         """Test that assistants cannot patch movies """
         res = self.client().patch('/movies/1', json=partial_movie, headers=casting_assistant)
         data = json.loads(res.data)
@@ -248,7 +247,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertFalse(data["success"])
         self.assertEqual(data["message"], "internal server error")
 
-    def test_delete_movie_director_permissions_500(self):  # director cannot delete movies
+    def test_delete_movie_director_permissions_500(self):
         """Test that directors cannot delete movies """
         res = self.client().delete('/movies/1/delete', headers=casting_director)
         data = json.loads(res.data)
@@ -256,6 +255,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 500)
         self.assertFalse(data["success"])
         self.assertEqual(data["message"], "internal server error")
+
 
 if __name__ == "__main__":
     unittest.main()

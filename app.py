@@ -112,7 +112,7 @@ def create_app(test_config=None):
             if updated_age:
                 actor.age = updated_age
             if updated_gender:
-                 actor.gender = updated_gender
+                actor.gender = updated_gender
             actor.update()
             return jsonify({
                 'success': True,
@@ -120,7 +120,6 @@ def create_app(test_config=None):
             })
         except:
             abort(400)
-
 
     @app.route("/movies/<int:movie_id>", methods=["PATCH"])
     @requires_auth('patch:movie')
@@ -143,7 +142,6 @@ def create_app(test_config=None):
             })
         except:
             abort(400)
-
 
     @app.route('/actors/<int:actor_id>/delete', methods=['DELETE'])
     @requires_auth('delete:actor')
@@ -178,7 +176,6 @@ def create_app(test_config=None):
             })
         except:
             abort(404)
-
 
     @app.errorhandler(400)
     def bad_request(error):
@@ -220,15 +217,13 @@ def create_app(test_config=None):
             "message": "internal server error"
         }), 500
 
-    ############################################################
-    """@app.errorhandler(AuthError)
+    @app.errorhandler(AuthError)
     def authentication_error(ex):
         return jsonify({
             "success": False,
             "error": ex.status_code,
             "message": ex.error['code']
-        }), ex.status_code"""
-
+        }), ex.status_code
 
     return app
 

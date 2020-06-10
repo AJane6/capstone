@@ -65,7 +65,7 @@ export FLASK_ENV=development
 flask run
 ```
 
-The first command tells the program where to fund our application, and the second tells the program to run in development mode. Meaning, it reloads every time we hit save (we don't have to restart the server manually each time) and we save a lot of development time. The application runs on https://castappajr.herokuapp.com/ if not running locally.  
+The first command tells the program where to fund our application, and the second tells the program to run in development mode. Meaning, it reloads every time we hit save (we don't have to restart the server manually each time) and we save a lot of development time. The application runs on https://capstone1997.herokuapp.com/ if not running locally.  
 
 
 ## Testing
